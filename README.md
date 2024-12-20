@@ -12,63 +12,16 @@ Synthetic Data Generation: Uses Blender to create realistic pipeline images with
 Data Augmentation: Augments training data to prevent overfitting and improve model generalization.
 YOLOv5 Model: Trains a YOLOv5 object detection model for real-time crack detection.
 Evaluation Metrics: Precision, Recall, mAP (mean Average Precision), and Learning Rate plots.
-Installation
-Prerequisites:
-Python 3.8+
-PyTorch 1.7+
-YOLOv5 dependencies
-Setup:
-Clone the repository:
 
-bash
-Copy code
-git clone https://github.com/yourusername/crack-detection-yolov5.git
-cd crack-detection-yolov5
-Install dependencies:
-
-bash
-Copy code
-pip install -r requirements.txt
-Download the YOLOv5 pre-trained weights (if not provided in the repository):
-
-bash
-Copy code
-wget https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s.pt
 Dataset
 The dataset used in this project includes both synthetic pipeline images generated using Blender and real-world images of pipelines with cracks. The dataset is organized as follows:
 
-Train: Training images and labels.
-Val: Validation images and labels.
-Test: Test images and labels.
+-Train: Training images and labels.
+-Val: Validation images and labels.
+-Test: Test images and labels.
+
 The synthetic data is generated using Blender, where cracks are created with different severities and placed in various locations within the pipeline images.
 
-Training
-To train the YOLOv5 model, run the following command:
-
-bash
-Copy code
-python train.py --img 640 --batch 16 --epochs 50 --data ./data/crack_detection.yaml --weights yolov5s.pt --project ./results --name crack_detection_model --cache --patience 10
-Hyperparameters:
-img: Input image size (640x640).
-batch: Batch size (16).
-epochs: Number of training epochs (50).
-data: Path to the dataset YAML configuration file.
-weights: Path to the pre-trained YOLOv5 weights.
-project: Directory to store training results.
-patience: Early stopping patience to prevent overfitting.
-Evaluation
-To evaluate the trained model on the test dataset, use the following command:
-
-bash
-Copy code
-python val.py --weights ./results/crack_detection_model/weights/best.pt --data ./data/crack_detection.yaml --img 640
-The evaluation results will provide metrics such as:
-
-Precision
-Recall
-mAP@0.5 (mean Average Precision at IOU=0.5)
-Learning Rate over Epochs
-Box, Object, and Class Losses
 Overfitting Check
 If the validation loss is higher than the training loss, and the difference exceeds a threshold, a warning is triggered indicating potential overfitting.
 
